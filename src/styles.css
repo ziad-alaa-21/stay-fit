@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Oswald:wght@600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0A0A0A; color: #FFFFFF; }
+  button, input, select, textarea { font: inherit; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  th { text-align: left; color: #A0A0A0; font-size: .76rem; text-transform: uppercase; white-space: nowrap; }
+  th button { color: inherit; font-weight: 800; }
+  td, th { padding: .9rem .85rem; border-bottom: 1px solid #333333; vertical-align: middle; }
+}
+
+@layer components {
+  .card { @apply rounded-lg border border-stay-border bg-stay-card p-5 shadow-[0_16px_40px_rgba(0,0,0,.22)]; }
+  .section-title { @apply font-display text-2xl uppercase leading-none tracking-normal; }
+  .input { @apply min-h-11 w-full rounded-md border border-stay-border bg-stay-elevated px-3 text-sm text-white outline-none transition focus:border-stay-red focus:ring-2 focus:ring-stay-red/30; }
+  .field { @apply block text-sm font-bold text-stay-muted; }
+  .field .input { @apply mt-1 text-white; }
+  .btn-primary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stay-red bg-stay-red px-4 py-2 text-sm font-bold text-white transition hover:shadow-glow; }
+  .btn-secondary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stay-border bg-stay-elevated px-4 py-2 text-sm font-bold text-white transition hover:border-stay-red hover:text-stay-red; }
+  .btn-danger { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-red-600 bg-red-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-700; }
+  .icon-btn { @apply inline-grid h-10 w-10 place-items-center rounded-md border border-stay-border bg-stay-elevated text-white transition hover:border-stay-red hover:text-stay-red; }
+  .icon-btn.danger { @apply hover:border-red-500 hover:text-red-400; }
+  .menu-item { @apply block w-full border-b border-stay-border px-4 py-3 text-left text-sm text-stay-muted hover:bg-white/5 hover:text-white; }
+  .filters { @apply mb-5 grid gap-3 md:grid-cols-2 xl:grid-cols-6; }
+  .table-wrap { @apply w-full overflow-x-auto rounded border border-stay-border; }
+  .data-table { @apply min-w-full border-collapse bg-stay-black/40 text-sm; }
+  .actions { @apply flex gap-2; }
+  .mini-select, .mini-input { @apply min-h-9 rounded border border-stay-border bg-stay-elevated px-2 text-sm text-white outline-none focus:border-stay-red; }
+  .mini-input { @apply w-20; }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .print-invoice, .print-invoice *, .print-invoice + div, .print-invoice + div * { visibility: visible; color: #000 !important; }
+  .print-invoice { position: fixed; inset: 20px; background: #fff; }
+}
