@@ -5,7 +5,19 @@
 
 @layer base {
   * { box-sizing: border-box; }
-  body { margin: 0; background: #0A0A0A; color: #FFFFFF; }
+  body { 
+    margin: 0; 
+    background: #0A0A0A; 
+    color: #FFFFFF; 
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    min-height: 100vh;
+  }
+  html { overflow-x: hidden; } /* Prevent horizontal scrolling on html element */
+  #root { 
+    overflow-x: hidden; 
+    min-height: 100vh;
+    width: 100%;
+  }
   button, input, select, textarea { font: inherit; }
   button:disabled { opacity: .45; cursor: not-allowed; }
   th { text-align: left; color: #A0A0A0; font-size: .76rem; text-transform: uppercase; white-space: nowrap; }
@@ -14,21 +26,78 @@
 }
 
 @layer components {
-  .card { @apply rounded-lg border border-stay-border bg-stay-card p-5 shadow-[0_16px_40px_rgba(0,0,0,.22)]; }
+  .card { @apply rounded-lg border border-stay-border bg-stay-card p-3 sm:p-4 md:p-5 shadow-[0_16px_40px_rgba(0,0,0,.22)]; }
   .section-title { @apply font-display text-2xl uppercase leading-none tracking-normal; }
   .input { @apply min-h-11 w-full rounded-md border border-stay-border bg-stay-elevated px-3 text-sm text-white outline-none transition focus:border-stay-red focus:ring-2 focus:ring-stay-red/30; }
   .field { @apply block text-sm font-bold text-stay-muted; }
   .field .input { @apply mt-1 text-white; }
-  .btn-primary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stay-red bg-stay-red px-4 py-2 text-sm font-bold text-white transition hover:shadow-glow; }
-  .btn-secondary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stay-border bg-stay-elevated px-4 py-2 text-sm font-bold text-white transition hover:border-stay-red hover:text-stay-red; }
-  .btn-danger { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-red-600 bg-red-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-700; }
+  .btn-primary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stay-red bg-stay-red px-3 sm:px-4 py-2 text-sm font-bold text-white transition hover:shadow-glow; }
+  .btn-secondary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-stay-border bg-stay-elevated px-3 sm:px-4 py-2 text-sm font-bold text-white transition hover:border-stay-red hover:text-stay-red; }
+  .btn-danger { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-red-600 bg-red-600 px-3 sm:px-4 py-2 text-sm font-bold text-white transition hover:bg-red-700; }
   .icon-btn { @apply inline-grid h-10 w-10 place-items-center rounded-md border border-stay-border bg-stay-elevated text-white transition hover:border-stay-red hover:text-stay-red; }
   .icon-btn.danger { @apply hover:border-red-500 hover:text-red-400; }
   .menu-item { @apply block w-full border-b border-stay-border px-4 py-3 text-left text-sm text-stay-muted hover:bg-white/5 hover:text-white; }
-  .filters { @apply mb-5 grid gap-3 md:grid-cols-2 xl:grid-cols-6; }
-  .table-wrap { @apply w-full overflow-x-auto rounded border border-stay-border; }
-  .data-table { @apply min-w-full border-collapse bg-stay-black/40 text-sm; }
-  .actions { @apply flex gap-2; }
+  .filters { @apply mb-5 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6; }
+  .table-wrap { @apply w-full overflow-x-auto rounded border border-stay-border max-w-full; }
+  .data-table { @apply min-w-[500px] sm:min-w-[600px] border-collapse bg-stay-black/40 text-sm; }
+  .actions { @apply flex flex-wrap gap-2; }
+  
+  /* Mobile table improvements */
+  @media (max-width: 768px) {
+    .data-table {
+      font-size: 0.75rem;
+      min-width: 500px; /* Smaller minimum width for mobile */
+    }
+    .data-table th,
+    .data-table td {
+      padding: 0.5rem 0.25rem;
+      white-space: nowrap;
+    }
+    .actions {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .icon-btn {
+      width: 2rem;
+      height: 2rem;
+    }
+    .card {
+      padding: 1rem;
+    }
+    .mini-select, .mini-input {
+      min-height: 2rem;
+      font-size: 0.75rem;
+    }
+    /* Ensure no horizontal overflow on mobile */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    body, html, #root {
+      overflow-x: hidden !important;
+    }
+  }
+  
+  /* Small mobile improvements */
+  @media (max-width: 640px) {
+    .filters {
+      grid-template-columns: 1fr;
+    }
+    .btn-primary, .btn-secondary, .btn-danger {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+    .input {
+      padding: 0.5rem 0.75rem;
+    }
+    /* Extra small screen fixes */
+    .section-title {
+      font-size: 1.25rem;
+    }
+    .card {
+      word-break: break-word;
+    }
+  }
   .mini-select, .mini-input { @apply min-h-9 rounded border border-stay-border bg-stay-elevated px-2 text-sm text-white outline-none focus:border-stay-red; }
   .mini-input { @apply w-20; }
 }

@@ -886,7 +886,7 @@ h3 {
   .nav-links {
     position: fixed;
     top: 78px;
-    right: 0;
+    left: 0;
     bottom: 0;
     z-index: 90;
     flex-direction: column;
@@ -894,8 +894,9 @@ h3 {
     width: min(360px, 88vw);
     padding: 28px;
     background: rgba(10, 10, 10, 0.98);
-    border-left: 2px solid var(--red);
-    transform: translateX(100%);
+    border-right: 2px solid var(--red);
+    border-left: none;
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
 
@@ -936,7 +937,8 @@ h3 {
       linear-gradient(180deg, rgba(10, 10, 10, 0.28) 0%, rgba(10, 10, 10, 0.94) 66%),
       radial-gradient(circle at 35% 74%, rgba(230, 57, 70, 0.22), transparent 34%),
       var(--hero-image);
-    background-position: center top;
+    background-position: center center;
+    background-size: cover;
   }
 
   .hero-slider,
@@ -973,14 +975,30 @@ h3 {
     height: 30px;
   }
 
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
   .category-card {
-    min-height: 250px;
+    min-height: 200px;
   }
 
   .category-card span {
-    font-size: clamp(1.55rem, 8vw, 2.4rem);
-    left: 16px;
-    right: 16px;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .category-card img,
+  .category-card .product-tub {
+    width: min(75%, 200px);
+    top: 40%;
+  }
+
+  .category-card img {
+    width: min(85%, 240px);
   }
 
   .carousel-shell {
@@ -1002,23 +1020,54 @@ h3 {
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .category-grid {
+    grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .category-card {
-    min-height: 220px;
+    min-height: 180px;
+  }
+
+  .category-card img,
+  .category-card .product-tub {
+    width: min(70%, 180px);
+    top: 35%;
+  }
+
+  .category-card img {
+    width: min(80%, 220px);
+  }
+
+  .hero-content h1,
+  .hero-content h2 {
+    font-size: clamp(3.2rem, 18vw, 5rem);
+  }
+
+  .bundle-promo {
+    padding: 50px 16px;
+  }
+
+  .bundle-visual img {
+    width: 100%;
+    max-width: 400px;
   }
 
   .product-tub {
-    width: 104px;
-    height: 132px;
+    width: 100px;
+    height: 124px;
   }
 
   .product-tub::after {
-    top: 54px;
-    font-size: 14px;
+    top: 52px;
+    font-size: 13px;
+  }
+
+  .slide-dots button {
+    min-width: 36px;
+    height: 28px;
+    font-size: 0.75rem;
   }
 }
 
